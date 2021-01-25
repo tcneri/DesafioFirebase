@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DesafioFirebase</string>
+    <string name="tvEmail">Email</string>
+    <string name="tvPassword">Password</string>
+    <string name="tvRemember">Remember</string>
+    <string name="tvCAccount">Create account</string>
+    <string name="btnLogin">LOG IN</string>
+</resources>
