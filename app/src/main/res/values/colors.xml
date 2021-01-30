@@ -13,4 +13,7 @@
     <color name="tvRemember">#47525E</color>
     <color name="CorCAccount">#00A6FF</color>
     <color name="red">#FF5252</color>
+    <color name="backGrey">#DDDDDD</color>
+    <color name="colorTitleGame">#1F2D3D</color>
+    <color name="colorYearGame">#8492A6</color>
 </resources>
