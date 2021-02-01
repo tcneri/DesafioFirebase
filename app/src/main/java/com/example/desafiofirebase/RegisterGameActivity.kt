@@ -46,11 +46,15 @@ class RegisterGameActivity : AppCompatActivity() {
             getRes()
         }
         bind.btnSaveGame.setOnClickListener {
-            viewModel.sendGame(Game(
-                    bind.etNameGameR.text.toString(),
-                    bind.etCreatedGR.text.toString(),
-                    bind.etDescriptionGR.text.toString(),
-                    viewModel.imgGame.value))
+            viewModel.imgGame.observe(this){
+                viewModel.sendGame(Game(
+                        bind.etNameGameR.text.toString(),
+                        bind.etCreatedGR.text.toString(),
+                        bind.etDescriptionGR.text.toString(),
+                        it
+                ))
+            }
+
             startActivity(Intent(this, HomeActivity::class.java))
 
 
@@ -58,9 +62,14 @@ class RegisterGameActivity : AppCompatActivity() {
 
     }
 
+
+
     fun config(){
+        var number = (0..200).random()
+        var nString = number.toString()
         alertDialog = SpotsDialog.Builder().setContext(this).build()
-        storageReference = FirebaseStorage.getInstance().getReference("img")
+
+        storageReference = FirebaseStorage.getInstance().getReference(nString)
     }
 
     fun getRes(){
@@ -75,27 +84,28 @@ class RegisterGameActivity : AppCompatActivity() {
 
         if(requestCode == CODE_IMG){
             alertDialog.show()
-            val uploadFile = storageReference.putFile(data!!.data!!)
-            val task = uploadFile.continueWithTask{task ->
-                if(task.isSuccessful)
-                {
-                    Toast.makeText(this, "Imagem Carrregada com sucesso!", Toast.LENGTH_SHORT).show()
+            val uploadFile = data?.data?.let { storageReference.putFile(it) }
+            if( uploadFile != null){
+                val task = uploadFile.continueWithTask { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Imagem carrregada com sucesso!", Toast.LENGTH_SHORT).show()
+                    }
+                    storageReference!!.downloadUrl
+                }.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+                        Log.i("URI", downloadUri.toString())
+                        val url = downloadUri!!.toString().substring(0, downloadUri.toString().indexOf("&token"))
+                        Log.i("URL da Imagem", url)
+                        alertDialog.dismiss()
+                        viewModel.saveUrlImage(downloadUri.toString())
+                    }
                 }
-                storageReference!!.downloadUrl
-            }.addOnCompleteListener{task->
-                if(task.isSuccessful){
-                    val downloadUri = task.result
-                    val url = downloadUri!!.toString().substring(0, downloadUri.toString().indexOf("&token"))
-                    Log.i("URL da Imagem", url)
-                    alertDialog.dismiss()
-                    viewModel.saveUrlImage(url)
-
-                }
-                else{
-                    viewModel.saveUrlImage(null)
-                    Toast.makeText(this, "Nenhuma imagem foi carregada.", Toast.LENGTH_SHORT).show()
-                }
+            }else{
+                alertDialog.dismiss()
+                Toast.makeText(this, "Nenhuma imagem foi carregada.", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 }

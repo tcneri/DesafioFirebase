@@ -31,6 +31,7 @@ class GameDetailsActivity : AppCompatActivity() {
 
         var idGame = intent.getIntExtra("id", 0)
         var titleG = intent.getStringExtra("title")
+        var createdG = intent.getStringExtra("created")
 
         setSupportActionBar(bind.toolbar)
         bind.toolbar.title = ""
@@ -52,17 +53,19 @@ class GameDetailsActivity : AppCompatActivity() {
         homeViewModel.getGames()
 
         bind.fbEditGame.setOnClickListener {
-            if (titleG != null) {
-                callEditGame(titleG)
+            if (titleG != null && createdG != null)  {
+                callEditGame(titleG, createdG)
+                finish()
             }
         }
 
 //        Toast.makeText(this, idGame.toString(), Toast.LENGTH_SHORT).show()
     }
 
-    fun callEditGame(titleG:String){
+    fun callEditGame(titleG:String, createdG:String){
         var intent = Intent(this, EditGameActivity::class.java)
         intent.putExtra("title", titleG)
+        intent.putExtra("created", createdG)
         startActivity(intent)
     }
 }

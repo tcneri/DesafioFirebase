@@ -26,9 +26,7 @@ class RegisterGameViewModel(val cr: CollectionReference) : ViewModel() {
     }
 
     fun saveUrlImage(img: String?){
-        if (img!=null){
-            imgGame.value = img
-        }
+        imgGame.value = img
 
     }
 

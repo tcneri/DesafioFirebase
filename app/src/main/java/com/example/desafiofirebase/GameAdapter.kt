@@ -34,7 +34,7 @@ class GameAdapter(val listGames: ArrayList<Game>, val listener: OnGameClickListe
     override fun getItemCount() = listGames.size
 
     interface OnGameClickListener{
-        fun gameClick(position: Int, id:Int, titleG:String)
+        fun gameClick(position: Int, id:Int, titleG:String, createdG:String)
     }
 
 
@@ -51,9 +51,10 @@ class GameAdapter(val listGames: ArrayList<Game>, val listener: OnGameClickListe
             val position = adapterPosition
             var id = listGames.get(position).id
             var titleG = listGames.get(position).title
+            var createdG = listGames.get(position).createdAt
 
             if (RecyclerView.NO_POSITION != position)
-                listener.gameClick(position, id, titleG)
+                listener.gameClick(position, id, titleG, createdG)
         }
     }
 
