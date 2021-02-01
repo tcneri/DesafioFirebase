@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.desafiofirebase.databinding.ActivityRegisterBinding
 import com.example.desafiofirebase.databinding.ActivityRegisterGameBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -17,15 +16,15 @@ import dmax.dialog.SpotsDialog
 
 
 class RegisterGameActivity : AppCompatActivity() {
-    private lateinit var bind:ActivityRegisterGameBinding
+    private lateinit var bind: ActivityRegisterGameBinding
 
     lateinit var alertDialog: AlertDialog
     lateinit var storageReference: StorageReference
     private val CODE_IMG = 1000
 
 
-    private val viewModel by viewModels<RegisterGameViewModel>{
-        object: ViewModelProvider.Factory{
+    private val viewModel by viewModels<RegisterGameViewModel> {
+        object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return RegisterGameViewModel(cr) as T
             }
@@ -45,25 +44,27 @@ class RegisterGameActivity : AppCompatActivity() {
             getRes()
         }
         bind.btnSaveGame.setOnClickListener {
-            viewModel.imgGame.observe(this){
+
+            if (bind.etNameGameR.text?.isNotBlank()!! &&
+                    bind.etCreatedGR.text?.isNotBlank()!! &&
+                    bind.etDescriptionGR.text?.isNotBlank()!!) {
                 viewModel.sendGame(Game(
                         bind.etNameGameR.text.toString(),
                         bind.etCreatedGR.text.toString(),
                         bind.etDescriptionGR.text.toString(),
-                        it
+                        viewModel.imgGame.value
                 ))
+
+                callHome()
+            } else {
+                showMsg("Preencha todas as informações.")
             }
 
-            startActivity(Intent(this, HomeActivity::class.java))
-
-
         }
-
     }
 
 
-
-    fun config(){
+    fun config() {
         var number = (0..200).random()
         var nString = number.toString()
         alertDialog = SpotsDialog.Builder().setContext(this).build()
@@ -71,7 +72,7 @@ class RegisterGameActivity : AppCompatActivity() {
         storageReference = FirebaseStorage.getInstance().getReference(nString)
     }
 
-    fun getRes(){
+    fun getRes() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -81,10 +82,10 @@ class RegisterGameActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == CODE_IMG){
+        if (requestCode == CODE_IMG) {
             alertDialog.show()
             val uploadFile = data?.data?.let { storageReference.putFile(it) }
-            if( uploadFile != null){
+            if (uploadFile != null) {
                 val task = uploadFile.continueWithTask { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Imagem carrregada com sucesso!", Toast.LENGTH_SHORT).show()
@@ -100,11 +101,20 @@ class RegisterGameActivity : AppCompatActivity() {
                         viewModel.saveUrlImage(downloadUri.toString())
                     }
                 }
-            }else{
+            } else {
                 alertDialog.dismiss()
-                Toast.makeText(this, "Nenhuma imagem foi carregada.", Toast.LENGTH_SHORT).show()
+                showMsg("Nenhuma imagem foi carregada.")
             }
 
         }
+    }
+
+    fun callHome() {
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
+    }
+
+    fun showMsg(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }
