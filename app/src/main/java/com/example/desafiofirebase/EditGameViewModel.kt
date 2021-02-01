@@ -3,13 +3,12 @@ package com.example.desafiofirebase
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.CollectionReference
-import kotlinx.coroutines.launch
 
-class RegisterGameViewModel(val cr: CollectionReference) : ViewModel() {
+
+class EditGameViewModel(val cr: CollectionReference) : ViewModel() {
     val resSend = MutableLiveData<Boolean>()
-    var imgGame = MutableLiveData<String?>()
+    var resGame= MutableLiveData<Game>()
 
     //    var listGame = MutableLiveData<ArrayList<Game>>()
 
@@ -25,12 +24,24 @@ class RegisterGameViewModel(val cr: CollectionReference) : ViewModel() {
 
     }
 
-    fun saveUrlImage(img: String?){
-        if (img!=null){
-            imgGame.value = img
+//    fun saveUrlImage(img: String?){
+//        if (img!=null){
+//            imgGame.value = img
+//        }
+//
+//    }
+
+
+    fun getGame(titleGame: String) {
+
+        cr.whereEqualTo("title", titleGame).get().addOnSuccessListener{ document ->
+            var item = document.toObjects(Game::class.java)
+            resGame.value = item[0]
         }
 
+
     }
+
 
 
 }

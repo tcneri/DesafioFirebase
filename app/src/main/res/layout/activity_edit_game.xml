@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterGameActivity"
+    tools:context=".EditGameActivity"
     android:background="@drawable/img_splash">
 
 
@@ -29,7 +29,7 @@
             android:textColorHint="@color/titleLogin">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNameGameR"
+                android:id="@+id/etNameGameE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
@@ -46,7 +46,7 @@
             android:textColorHint="@color/titleLogin">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etCreatedGR"
+                android:id="@+id/etCreatedGE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -64,7 +64,7 @@
             android:textColorHint="@color/titleLogin">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etDescriptionGR"
+                android:id="@+id/etDescriptionGE"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
@@ -97,10 +97,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/ivAddGameR"
+            android:id="@+id/ivAddGameE"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_camera" />
+          />
 
     </LinearLayout>
 

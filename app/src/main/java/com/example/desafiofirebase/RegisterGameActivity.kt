@@ -24,6 +24,7 @@ class RegisterGameActivity : AppCompatActivity() {
     lateinit var storageReference: StorageReference
     private val CODE_IMG = 1000
 
+
     private val viewModel by viewModels<RegisterGameViewModel>{
         object: ViewModelProvider.Factory{
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -38,8 +39,21 @@ class RegisterGameActivity : AppCompatActivity() {
         setContentView(bind.root)
         config()
 
+
+
+
         bind.ivAddGameR.setOnClickListener {
             getRes()
+        }
+        bind.btnSaveGame.setOnClickListener {
+            viewModel.sendGame(Game(
+                    bind.etNameGameR.text.toString(),
+                    bind.etCreatedGR.text.toString(),
+                    bind.etDescriptionGR.text.toString(),
+                    viewModel.imgGame.value))
+            startActivity(Intent(this, HomeActivity::class.java))
+
+
         }
 
     }
@@ -74,7 +88,12 @@ class RegisterGameActivity : AppCompatActivity() {
                     val url = downloadUri!!.toString().substring(0, downloadUri.toString().indexOf("&token"))
                     Log.i("URL da Imagem", url)
                     alertDialog.dismiss()
-//                    Picasso.get().load(url).into(ivRes)
+                    viewModel.saveUrlImage(url)
+
+                }
+                else{
+                    viewModel.saveUrlImage(null)
+                    Toast.makeText(this, "Nenhuma imagem foi carregada.", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -9,18 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DesafioFirebase">
-        <activity android:name=".RegisterGameActivity"></activity>
+        <activity android:name=".EditGameActivity"></activity>
+        <activity android:name=".RegisterGameActivity" />
         <activity android:name=".GameDetailsActivity" />
-        <activity
-            android:name=".HomeActivity">
-<!--            android:launchMode="singleTop">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.SEARCH" />-->
-<!--            </intent-filter>-->
+        <activity android:name=".HomeActivity">
 
-<!--            <meta-data-->
-<!--                android:name="android.app.searchable"-->
-<!--                android:resource="@xml/searchable" />-->
+            <!-- android:launchMode="singleTop"> -->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.SEARCH" /> -->
+            <!-- </intent-filter> -->
+
+
+            <!-- <meta-data -->
+            <!-- android:name="android.app.searchable" -->
+            <!-- android:resource="@xml/searchable" /> -->
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
@@ -32,9 +34,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
-<!--            <meta-data-->
-<!--                android:name="android.app.default_searchable"-->
-<!--                android:value=".HomeActivity" />-->
+
+            <!-- <meta-data -->
+            <!-- android:name="android.app.default_searchable" -->
+            <!-- android:value=".HomeActivity" /> -->
         </activity>
     </application>
 

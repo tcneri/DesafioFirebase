@@ -2,9 +2,14 @@ package com.example.desafiofirebase
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_login.view.*
+import kotlinx.android.synthetic.main.item.view.*
 
-class GameAdapter(val listGames: List<Game>, val listener:OnComicClickListener): RecyclerView.Adapter<GameAdapter.GameViewHolder>(){
+class GameAdapter(val listGames: ArrayList<Game>, val listener: OnGameClickListener): RecyclerView.Adapter<GameAdapter.GameViewHolder>(){
 
 
     override fun onCreateViewHolder(
@@ -17,22 +22,26 @@ class GameAdapter(val listGames: List<Game>, val listener:OnComicClickListener):
 
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
-
-//        holder.tvTit.text = "#"+comic.id.toString()
-//        Picasso.get().load(img).resize(110,150).into(holder.ivComic)
+        var game = listGames.get(position)
+        holder.tvTit.text = game.title
+        holder.tvCreat.text = game.createdAt
+        if (game.gameUrlImg != null){
+            Picasso.get().load(game.gameUrlImg).fit().into(holder.ivGame)
+        }
 
     }
 
     override fun getItemCount() = listGames.size
 
-    interface OnComicClickListener{
-        fun gameClick(position: Int)
+    interface OnGameClickListener{
+        fun gameClick(position: Int, id:Int, titleG:String)
     }
 
 
     inner class GameViewHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
-//        val tvTit:TextView = view.tvComic
-//        val ivComic:ImageView = view.ivComic
+        val tvTit: TextView = view.tvTitleGame
+        val tvCreat: TextView = view.tvCreatedAtGame
+        val ivGame: ImageView = view.ivImgGame
 
         init {
             view.setOnClickListener(this)
@@ -40,8 +49,11 @@ class GameAdapter(val listGames: List<Game>, val listener:OnComicClickListener):
 
         override fun onClick(v: View?) {
             val position = adapterPosition
+            var id = listGames.get(position).id
+            var titleG = listGames.get(position).title
+
             if (RecyclerView.NO_POSITION != position)
-                listener.gameClick(position)
+                listener.gameClick(position, id, titleG)
         }
     }
 
