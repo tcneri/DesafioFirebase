@@ -13,16 +13,6 @@
         <activity android:name=".RegisterGameActivity" />
         <activity android:name=".GameDetailsActivity" />
         <activity android:name=".HomeActivity">
-
-            <!-- android:launchMode="singleTop"> -->
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.SEARCH" /> -->
-            <!-- </intent-filter> -->
-
-
-            <!-- <meta-data -->
-            <!-- android:name="android.app.searchable" -->
-            <!-- android:resource="@xml/searchable" /> -->
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
@@ -33,12 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
 
-            <!-- <meta-data -->
-            <!-- android:name="android.app.default_searchable" -->
-            <!-- android:value=".HomeActivity" /> -->
-        </activity>
     </application>
 
 </manifest>

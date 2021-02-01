@@ -6,7 +6,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_login.view.*
 import kotlinx.android.synthetic.main.item.view.*
 
 class GameAdapter(val listGames: ArrayList<Game>, val listener: OnGameClickListener): RecyclerView.Adapter<GameAdapter.GameViewHolder>(){

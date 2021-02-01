@@ -13,9 +13,8 @@ import com.example.desafiofirebase.databinding.ActivityRegisterBinding
 import com.example.desafiofirebase.databinding.ActivityRegisterGameBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
-import kotlinx.android.synthetic.main.activity_register_game.*
+
 
 class RegisterGameActivity : AppCompatActivity() {
     private lateinit var bind:ActivityRegisterGameBinding

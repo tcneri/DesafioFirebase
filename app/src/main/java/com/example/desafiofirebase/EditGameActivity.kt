@@ -10,12 +10,10 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.desafiofirebase.databinding.ActivityEditGameBinding
-import com.example.desafiofirebase.databinding.ActivityRegisterGameBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
-import kotlinx.android.synthetic.main.item.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

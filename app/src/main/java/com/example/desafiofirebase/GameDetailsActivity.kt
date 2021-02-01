@@ -3,14 +3,12 @@ package com.example.desafiofirebase
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.desafiofirebase.databinding.ActivityGameDetailsBinding
-import com.example.desafiofirebase.databinding.ActivityLoginBinding
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_game_details.*
+
 
 class GameDetailsActivity : AppCompatActivity() {
     private lateinit var bind: ActivityGameDetailsBinding
@@ -59,7 +57,6 @@ class GameDetailsActivity : AppCompatActivity() {
             }
         }
 
-//        Toast.makeText(this, idGame.toString(), Toast.LENGTH_SHORT).show()
     }
 
     fun callEditGame(titleG:String, createdG:String){

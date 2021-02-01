@@ -3,7 +3,6 @@ package com.example.desafiofirebase
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.desafiofirebase.databinding.ActivityMainBinding
 import com.example.desafiofirebase.databinding.ActivitySplashBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
